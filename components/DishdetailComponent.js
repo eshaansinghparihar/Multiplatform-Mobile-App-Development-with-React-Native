@@ -15,7 +15,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
     postFavorite: (dishId) => dispatch(postFavorite(dishId)),
-    postComment:(dishId, author, rating , comment)=>dispatch(postComment(dishId, author, rating , comment))
+    postComment:(dishId, rating, author, comment)=>dispatch(postComment(dishId, rating, author, comment))
 })
 
 function RenderDish(props) {
@@ -101,7 +101,7 @@ class DishDetail extends Component {
         };
     }
     handleComments(dishId){
-        this.props.postComment(dishId, this.state.rating, this.state.comment, this.state.author);
+        this.props.postComment(dishId, this.state.rating, this.state.author, this.state.comment);
         this.setState({
             rating:0,
             author:'',

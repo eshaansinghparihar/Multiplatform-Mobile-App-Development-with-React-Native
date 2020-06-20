@@ -219,7 +219,8 @@ const MainNavigator = createDrawerNavigator({
                     />
               )
           }
-      },Favorites:
+      },
+      Favorites:
       { screen: FavoritesNavigator,
         navigationOptions: {
           title: 'My Favorites',

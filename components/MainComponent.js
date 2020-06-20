@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Home from './HomeComponent';
 import AboutUs from './AboutComponent';
 import Menu from './MenuComponent';
+import Favorites from './FavoriteComponent';
 import ContactUs from './ContactComponent';
 import Dishdetail from './DishdetailComponent';
 import Reservation from './ReservationComponent';
@@ -66,7 +67,22 @@ const ReservationNavigator = createStackNavigator({
         onPress={ () => navigation.navigate('DrawerToggle') } />    
     })
   })
-
+  const FavoritesNavigator = createStackNavigator({
+    Favorites: { screen: Favorites }
+  }, {
+    navigationOptions: ({ navigation }) => ({
+      headerStyle: {
+          backgroundColor: "#512DA8"
+      },
+      headerTitleStyle: {
+          color: "#fff"            
+      },
+      headerTintColor: "#fff",
+      headerLeft: <Icon name="menu" size={24}
+        iconStyle={{ color: 'white' }} 
+        onPress={ () => navigation.navigate('DrawerToggle') } />    
+    })
+  })
 const HomeNavigator = createStackNavigator({
     Home: { screen: Home }
   }, {
@@ -203,6 +219,20 @@ const MainNavigator = createDrawerNavigator({
                     />
               )
           }
+      },Favorites:
+      { screen: FavoritesNavigator,
+        navigationOptions: {
+          title: 'My Favorites',
+          drawerLabel: 'My Favorites',
+          drawerIcon: ({ tintColor, focused }) => (
+            <Icon
+              name='heart'
+              type='font-awesome'            
+              size={24}
+              iconStyle={{ color: tintColor }}
+            />
+          ),
+        }
       },
       Reservation:
       { screen: ReservationNavigator,

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Picker, Switch, Button, Modal, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, Picker, Switch, Button, Modal, ScrollView ,Alert} from 'react-native';
 import { Card } from 'react-native-elements';
 import DatePicker from 'react-native-datepicker'
-
+import * as Animatable from 'react-native-animatable';
 class Reservation extends Component {
 
     constructor(props) {
@@ -26,6 +26,15 @@ class Reservation extends Component {
 
     handleReservation() {
         console.log(JSON.stringify(this.state));
+        Alert.alert(
+            'Your Reservation OK?',
+            'Number of Guests: ' + this.state.guests + '\nSmoking? ' + this.state.smoking + '\nDate and Time: ' + this.state.date,
+            [
+            {text: 'Cancel', onPress: () => this.resetForm(), style: 'cancel'},
+            {text: 'OK', onPress: () => this.resetForm()},
+            ],
+            { cancelable: false }
+        );
         this.toggleModal();
     }
 
@@ -41,6 +50,7 @@ class Reservation extends Component {
     render() {
         return(
             <ScrollView>
+                <Animatable.View animation = "zoomInDown" duration = {2000} delay = {1000}>
                 <Card>
                 <View style={styles.formRow}>
                 <Text style={styles.formLabel}>Number of Guests</Text>
@@ -117,6 +127,7 @@ class Reservation extends Component {
                     </View>
                 </Modal>
                 </Card>
+                </Animatable.View>
             </ScrollView>
         );
     }

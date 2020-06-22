@@ -50,7 +50,7 @@ function RenderDish(props) {
                     { cancelable: false }
                 );
             if(recognizeDragLeft(gestureState))
-                props.onSelect();
+            props.onSelect();
             return true;
         },
         onPanResponderGrant: () => {this.view.rubberBand(1000).then(endState => console.log(endState.finished ? 'finished' : 'cancelled'));},

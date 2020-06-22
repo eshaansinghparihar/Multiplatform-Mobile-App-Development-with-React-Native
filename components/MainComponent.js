@@ -6,6 +6,7 @@ import Favorites from './FavoriteComponent';
 import ContactUs from './ContactComponent';
 import Dishdetail from './DishdetailComponent';
 import Reservation from './ReservationComponent';
+import Login from './LoginComponent';
 import { View, Platform, Text, ScrollView, Image, StyleSheet } from 'react-native';
 import { createStackNavigator, createDrawerNavigator, DrawerItems, SafeAreaView } from 'react-navigation';
 import { Icon } from 'react-native-elements';
@@ -27,7 +28,22 @@ const mapDispatchToProps = dispatch => ({
     fetchLeaders: () => dispatch(fetchLeaders()),
     fetchPromotions: () => dispatch(fetchPromos())
 });
-
+const LoginNavigator = createStackNavigator({
+    Login: { screen: Login }
+  }, {
+  navigationOptions: ({ navigation }) => ({
+    headerStyle: {
+        backgroundColor: "#512DA8"
+    },
+    headerTitleStyle: {
+        color: "#fff"            
+    },
+    headerTintColor: "#fff",
+    headerLeft: <Icon name="menu" size={24}
+      iconStyle={{ color: 'white' }} 
+      onPress={ () => navigation.toggleDrawer() } />    
+  })
+});
 const MenuNavigator = createStackNavigator({
     Menu: { screen: Menu,
         navigationOptions: ({ navigation }) => ({
@@ -158,6 +174,21 @@ const CustomDrawerContentComponent = (props) => (
 );
 
 const MainNavigator = createDrawerNavigator({
+    Login: 
+  { screen: LoginNavigator,
+    navigationOptions: {
+      title: 'Login',
+      drawerLabel: 'Login',
+      drawerIcon: ({ tintColor, focused }) => (
+        <Icon
+          name='sign-in'
+          type='font-awesome'            
+          size={24}
+          iconStyle={{ color: tintColor }}
+        />
+      ),
+    }
+  },
     Home: 
       { screen: HomeNavigator,
         navigationOptions: {
@@ -251,8 +282,9 @@ const MainNavigator = createDrawerNavigator({
         }
       }
 }, {
-  drawerBackgroundColor: '#D1C4E9',
-  contentComponent: CustomDrawerContentComponent
+    initialRouteName: 'Home',
+    drawerBackgroundColor: '#D1C4E9',
+    contentComponent: CustomDrawerContentComponent
 });
 
 class Main extends Component {
